@@ -1,0 +1,211 @@
+# CS 3503 Assignment 1 Test Cases
+# Format: function_name input1 input2 expected_output
+# Lines starting with # are comments
+# Empty lines are ignored
+#
+# NOTE: You are free to break these sections apart into separate files
+# or reorganize as needed for your testing approach. The TXT format was
+# chosen to give you experience with parsing various data formats you'll
+# encounter in systems programming.
+
+# =============================================================================
+# DIVISION METHOD TESTS (div_convert)
+# =============================================================================
+
+# Basic conversion tests - mirrors original hand calculations
+div_convert 104 5 404 [PASS]
+div_convert 156 8 234 [PASS]
+div_convert 255 16 FF [PASS]
+div_convert 255 10 255 [PASS]
+div_convert 255 2 11111111 [PASS]
+div_convert 42 2 101010 [PASS]
+
+# Edge cases - zero and small numbers
+div_convert 0 2 0 [PASS]
+div_convert 0 8 0 [PASS]
+div_convert 0 10 0 [PASS]
+div_convert 0 16 0 [PASS]
+div_convert 1 2 1 [PASS]
+div_convert 1 8 1 [PASS]
+div_convert 1 16 1 [PASS]
+
+# Powers of base - good algorithm tests
+div_convert 8 2 1000 [PASS]
+div_convert 16 2 10000 [PASS]
+div_convert 64 8 100 [PASS]
+div_convert 256 16 100 [PASS]
+
+# Large numbers - test algorithm robustness
+div_convert 4294967295 2 11111111111111111111111111111111 [PASS]
+div_convert 4294967295 8 37777777777 [PASS]
+div_convert 4294967295 10 4294967295 [PASS]
+div_convert 4294967295 16 FFFFFFFF [PASS]
+
+# Mixed base tests
+div_convert 42 5 132 [PASS]
+div_convert 42 8 52 [PASS]
+div_convert 42 10 42 [PASS]
+div_convert 42 16 2A [PASS]
+
+# =============================================================================
+# SUBTRACTION METHOD TESTS (sub_convert)
+# =============================================================================
+
+# Basic conversion tests - should match division method results
+sub_convert 104 5 404 [PASS]
+sub_convert 156 8 234 [PASS]
+sub_convert 255 16 FF [PASS]
+sub_convert 255 10 255 [PASS]
+sub_convert 255 2 11111111 [PASS]
+sub_convert 42 2 101010 [PASS]
+
+# Edge cases - zero and small numbers
+sub_convert 0 2 0 [PASS]
+sub_convert 0 8 0 [PASS]
+sub_convert 0 10 0 [PASS]
+sub_convert 0 16 0 [PASS]
+sub_convert 1 2 1 [PASS]
+sub_convert 1 8 1 [PASS]
+sub_convert 1 16 1 [PASS]
+
+# Powers of base
+sub_convert 8 2 1000 [PASS]
+sub_convert 16 2 10000 [PASS]
+sub_convert 64 8 100 [PASS]
+sub_convert 256 16 100 [PASS]
+
+# Large numbers - test algorithm robustness
+sub_convert 4294967295 2 11111111111111111111111111111111 [PASS]
+sub_convert 4294967295 8 37777777777 [PASS]
+sub_convert 4294967295 10 4294967295 [PASS]
+sub_convert 4294967295 16 FFFFFFFF [PASS]
+
+# Mixed base tests
+sub_convert 42 5 132 [PASS]
+sub_convert 42 8 52 [PASS]
+sub_convert 42 10 42 [PASS]
+sub_convert 42 16 2A [PASS]
+
+# =============================================================================
+# ALGORITHM COMPARISON TESTS
+# =============================================================================
+
+# These tests verify both algorithms produce identical results
+# Students can use these to validate their implementations
+
+# Small comparison tests
+div_convert 7 2 111 [PASS]
+sub_convert 7 2 111 [PASS]
+
+div_convert 15 8 17 [PASS]
+sub_convert 15 8 17 [PASS]
+
+div_convert 31 16 1F [PASS]
+sub_convert 31 16 1F [PASS]
+
+# Medium comparison tests  
+div_convert 1000 2 1111101000 [PASS]
+sub_convert 1000 2 1111101000 [PASS]
+
+div_convert 1000 8 1750 [PASS]
+sub_convert 1000 8 1750	[PASS]
+
+div_convert 1000 16 3E8 [PASS]
+sub_convert 1000 16 3E8 [PASS]
+
+# =============================================================================
+# BIT OPERATIONS TESTS (print_tables)
+# =============================================================================
+
+# Note: print_tables tests are marked as FORMATTED_OUTPUT
+# Students need to implement exact format matching for these tests
+# Expected format for each operation (3 lines total):
+# Original: Binary=<binary> Octal=<octal> Decimal=<decimal> Hex=<hex>
+# Left Shift by 3: Binary=<binary> Octal=<octal> Decimal=<decimal> Hex=<hex>
+# AND with 0xFF: Binary=<binary> Octal=<octal> Decimal=<decimal> Hex=<hex>
+
+# Basic bit operations test
+print_tables 5 FORMATTED_OUTPUT [PASS]
+
+# Zero test - important edge case
+print_tables 0 FORMATTED_OUTPUT [PASS]
+
+# Small numbers
+print_tables 1 FORMATTED_OUTPUT [PASS]
+print_tables 7 FORMATTED_OUTPUT [PASS]
+print_tables 15 FORMATTED_OUTPUT [PASS]
+
+# Powers of 2 - good for bit shifting
+print_tables 8 FORMATTED_OUTPUT [PASS]
+print_tables 16 FORMATTED_OUTPUT [PASS]
+print_tables 32 FORMATTED_OUTPUT [PASS]
+
+# Test bit masking with 0xFF
+print_tables 255 FORMATTED_OUTPUT [PASS]
+print_tables 256 FORMATTED_OUTPUT [PASS]
+print_tables 511 FORMATTED_OUTPUT [PASS]
+
+# Larger numbers
+print_tables 1000 FORMATTED_OUTPUT [PASS]
+print_tables 65535 FORMATTED_OUTPUT [PASS]
+
+# Maximum value test
+print_tables 4294967295 FORMATTED_OUTPUT [PASS]
+
+# =============================================================================
+# STRESS TESTS
+# =============================================================================
+
+# Test algorithm efficiency with challenging inputs
+div_convert 2147483647 2 1111111111111111111111111111111 [PASS]
+sub_convert 2147483647 2 1111111111111111111111111111111 [PASS]
+
+div_convert 1073741824 8 10000000000 [PASS]
+sub_convert 1073741824 8 10000000000 [PASS]
+
+div_convert 268435456 16 10000000 [PASS]
+sub_convert 268435456 16 10000000 [PASS]
+
+# =============================================================================
+# BOUNDARY TESTS
+# =============================================================================
+
+# Test edge cases near system limits
+div_convert 4294967294 10 4294967294 [PASS]
+sub_convert 4294967294 10 4294967294 [PASS]
+
+div_convert 4294967294 16 FFFFFFFE [PASS]
+sub_convert 4294967294 16 FFFFFFFE [PASS]
+
+# Test single digit results in various bases
+div_convert 4 5 4 [PASS]
+sub_convert 4 5 4 [PASS]
+
+div_convert 7 8 7 [PASS]
+sub_convert 7 8 7 [PASS]
+
+div_convert 15 16 F [PASS]
+sub_convert 15 16 F [PASS]
+
+# =============================================================================
+# SPECIAL CASES
+# =============================================================================
+
+# Test cases that often reveal implementation bugs
+
+# Base 5 special cases (since it's uncommon)
+div_convert 25 5 100 [PASS]
+sub_convert 25 5 100 [PASS]
+
+div_convert 124 5 444 [PASS]
+sub_convert 124 5 444 [PASS]
+
+# Hex letter cases (should be uppercase)
+div_convert 171 16 AB [PASS]
+sub_convert 171 16 AB [PASS]
+
+# FIXED: Corrected hex conversion (was CAFEBABE, should be CAFFFF00)
+div_convert 3405774592 16 CAFFFF00 [PASS]
+sub_convert 3405774592 16 CAFFFF00 [PASS]
+
+# End of test file
